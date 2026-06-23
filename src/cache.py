@@ -1,8 +1,5 @@
-import json
-import os
 import sqlite3
 import hashlib
-from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
@@ -67,7 +64,9 @@ def _cosine_similarity(a, b):
     return float(np.dot(a, b))
 
 
-def get_cached_response(prompt: str, model: str, threshold: float = SIMILARITY_THRESHOLD) -> Optional[str]:
+def get_cached_response(
+    prompt: str, model: str, threshold: float = SIMILARITY_THRESHOLD
+) -> Optional[str]:
     conn = _ensure_db()
     prompt_emb = _get_embedding(prompt)
     rows = conn.execute(
