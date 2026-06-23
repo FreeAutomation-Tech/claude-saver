@@ -1,5 +1,4 @@
 import re
-from typing import Any
 
 
 def estimate_tokens(text: str) -> int:

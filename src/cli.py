@@ -49,7 +49,11 @@ def main():
             print(f"  {'Date':<14} {'Cost':>8} {'Saved':>8} {'Requests':>10}")
             print(f"  {'-'*14} {'-'*8} {'-'*8} {'-'*10}")
             for d in stats["daily"][:14]:
-                print(f"  {d['date']:<14} ${format_dollar(d['cost']):>6} ${format_dollar(d['saved']):>6} {d['requests']:>10}")
+                cost = format_dollar(d["cost"])
+                saved = format_dollar(d["saved"])
+                print(
+                    f"  {d['date']:<14} ${cost:>6} ${saved:>6} {d['requests']:>10}"
+                )
             print()
 
         if stats["model_breakdown"]:
@@ -57,7 +61,11 @@ def main():
             print(f"  {'Model':<35} {'Requests':>10} {'Cost':>10} {'Saved':>10}")
             print(f"  {'-'*35} {'-'*10} {'-'*10} {'-'*10}")
             for m in stats["model_breakdown"]:
-                print(f"  {m['model']:<35} {m['requests']:>10} ${format_dollar(m['cost']):>8} ${format_dollar(m['saved']):>8}")
+                cost = format_dollar(m["cost"])
+                saved = format_dollar(m["saved"])
+                print(
+                    f"  {m['model']:<35} {m['requests']:>10} ${cost:>8} ${saved:>8}"
+                )
             print()
 
         print(f"  Lifetime savings:  ${format_dollar(total_savings)}")

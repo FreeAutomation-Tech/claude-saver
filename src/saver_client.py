@@ -1,5 +1,5 @@
 import os
-from typing import Any, Optional
+from typing import Optional
 
 from anthropic import Anthropic as OriginalAnthropic
 
@@ -26,9 +26,6 @@ class SaverAnthropic:
         model = kwargs.get("model", "claude-3-sonnet-20240229")
         messages = kwargs.get("messages", [])
         system = kwargs.get("system", "")
-        max_tokens = kwargs.get("max_tokens", 1024)
-        temperature = kwargs.get("temperature", 1.0)
-
         prompt_text = system + "\n" + "\n".join(
             f"{m.get('role', 'user')}: {m.get('content', '')}" for m in messages
         )
@@ -83,8 +80,9 @@ class SaverAnthropic:
         prompt_tokens = 0
         completion_tokens = 0
         if hasattr(response, "usage"):
-            prompt_tokens = response.usage.input_tokens if hasattr(response.usage, "input_tokens") else 0
-            completion_tokens = response.usage.output_tokens if hasattr(response.usage, "output_tokens") else 0
+            usage = response.usage
+            prompt_tokens = getattr(usage, "input_tokens", 0)
+            completion_tokens = getattr(usage, "output_tokens", 0)
 
         log_usage(
             model=model,

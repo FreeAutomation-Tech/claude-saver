@@ -1,9 +1,6 @@
-import json
-import os
 import sqlite3
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Optional
 
 DB_DIR = Path.home() / ".claude-saver"
 DB_PATH = DB_DIR / "usage.db"

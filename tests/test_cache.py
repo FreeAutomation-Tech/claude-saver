@@ -1,6 +1,3 @@
-import hashlib
-from unittest.mock import patch
-
 from src.cache import _text_hash, get_cache_stats, clear_cache
 
 
