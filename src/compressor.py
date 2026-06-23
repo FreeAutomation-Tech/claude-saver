@@ -78,13 +78,12 @@ def optimize_prompt(prompt: str) -> str:
     prompt = re.sub(r"\s+", " ", prompt).strip()
     prompt = re.sub(r"\n{3,}", "\n\n", prompt)
     prompt = re.sub(r"#{4,}", "###", prompt)
+    prompt = re.sub(r"<!--.*?-->", "", prompt)
     lines = prompt.split("\n")
     optimized = []
     for line in lines:
         stripped = line.strip()
         if stripped.startswith("---") or stripped.startswith("___"):
-            continue
-        if stripped.startswith("<!--") and stripped.endswith("-->"):
             continue
         optimized.append(line)
     result = "\n".join(optimized)
