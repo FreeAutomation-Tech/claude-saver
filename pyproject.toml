@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[project]
+name = "claude-saver"
+version = "1.0.0"
+description = "Drop-in Anthropic SDK wrapper that cuts Claude API costs with caching, compression, and usage tracking"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "FreeAutomation-Tech", email = "freeautomation.tech@gmail.com"},
+]
+keywords = ["claude", "anthropic", "api", "cost-saver", "cache", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "anthropic>=0.8.0",
+    "sentence-transformers>=2.2.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-mock>=3.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/FreeAutomation-Tech/claude-saver"
+Repository = "https://github.com/FreeAutomation-Tech/claude-saver"
+
+[project.scripts]
+claude-saver = "src.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
